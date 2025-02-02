@@ -95,7 +95,7 @@ resource "aws_security_group" "james_ssh_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [var.access_ip]
+    cidr_blocks = [var.ssh_access_ip]
     description = "for SSH access"
   }
 

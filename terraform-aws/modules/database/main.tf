@@ -1,3 +1,4 @@
+
 resource "aws_db_instance" "james_db" {
   allocated_storage      = var.db_storage
   engine                 = var.db_engine
@@ -7,7 +8,7 @@ resource "aws_db_instance" "james_db" {
   username               = var.db_username
   password               = var.db_password
   db_subnet_group_name   = var.db_subnet_group_name
-  vpc_security_group_ids = var.vpc_security_group_ids
+  vpc_security_group_ids = var.vpc_security_group_ids // the RDS instance must be assigned at least one security group.
   identifier             = var.db_identifier
   skip_final_snapshot    = var.skip_final_snapshot
   tags = {

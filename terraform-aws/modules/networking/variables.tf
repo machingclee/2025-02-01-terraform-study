@@ -11,7 +11,7 @@ variable "private_cidrs" {
   type = list(string)
 }
 
-variable "access_ip" {
+variable "ssh_access_ip" {
   type = string
 }
 
