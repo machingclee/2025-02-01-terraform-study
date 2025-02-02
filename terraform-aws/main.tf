@@ -40,3 +40,14 @@ module "loadbalancing" {
   listener_port          = 8000
   listener_portocol      = "HTTP"
 }
+
+module "compute" {
+  source                = "./modules/compute"
+  instance_count        = 1
+  instance_type         = "t3.micro"
+  vol_size              = 10
+  public_security_gp_id = module.networking.public_http_sg.id
+  public_subnet_ids     = module.networking.public_subnet_ids
+  key_name              = "james_key"
+  public_key_path       = "C:\\Users\\machingclee\\.ssh\\jameskey.pub" # windows specific
+}
