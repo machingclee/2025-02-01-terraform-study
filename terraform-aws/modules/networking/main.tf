@@ -121,17 +121,28 @@ resource "aws_security_group" "james_http_sg" {
   }
 }
 
+resource "aws_security_group" "ec2_security_group" {
+  name        = "james_ec2_sg"
+  description = "Security Group for EC2"
+  vpc_id      = aws_vpc.james_vpc.id
+}
+
+
 resource "aws_security_group" "james_private_rds" {
   name        = "james_private_rds"
   description = "Security Group for Private RDS"
   vpc_id      = aws_vpc.james_vpc.id
 
   ingress {
-    from_port   = 5432
-    to_port     = 5432
+    from_port   = 3306
+    to_port     = 3306
     protocol    = "tcp"
     cidr_blocks = [var.vpc_cidr]
     description = "pgsql allows everything in the VPC to access"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 

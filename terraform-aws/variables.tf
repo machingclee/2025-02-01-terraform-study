@@ -6,7 +6,6 @@ variable "ssh_access_ip" {
   type = string
 }
 
-
 variable "db_name" {
   type = string
 }

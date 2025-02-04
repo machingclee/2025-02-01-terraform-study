@@ -21,3 +21,7 @@ output "public_http_sg" {
 output "public_ssh_sg" {
   value = aws_security_group.james_ssh_sg
 }
+
+output "james_ec2_sg" {
+  value = aws_security_group.ec2_security_group
+}

@@ -42,5 +42,4 @@ resource "aws_lb_listener" "james_lb_listener" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.james_target_group.arn
   }
-
 }

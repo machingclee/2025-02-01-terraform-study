@@ -30,15 +30,21 @@ resource "aws_key_pair" "james_auth" {
   public_key = file(var.public_key_path)
 }
 
-
-
 resource "aws_instance" "james_node" {
   count                  = var.instance_count # 1
   instance_type          = var.instance_type  # t3.micro
+  security_groups        = [var.ec2_security_group_id]
   ami                    = data.aws_ami.server_ami.id
   key_name               = aws_key_pair.james_auth.key_name
-  vpc_security_group_ids = [var.public_security_gp_id]
+  vpc_security_group_ids = var.public_security_gp_ids
   subnet_id              = var.public_subnet_ids[count.index]
+  user_data = templatefile(var.user_data_path, {
+    nodename    = "james-node-${random_id.james_node_id[count.index].dec}"
+    dbuser      = var.db_user
+    dbpass      = var.db_password
+    db_endpoint = var.db_endpoint
+    dbname      = var.db_name
+  })
   root_block_device {
     volume_size = var.vol_size # 10
   }
