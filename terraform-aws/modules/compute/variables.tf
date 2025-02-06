@@ -46,3 +46,8 @@ variable "db_name" {
 variable "ec2_security_group_id" {
   type = string
 }
+
+variable "james_target_group_arn" {
+  type = string
+}
+

@@ -119,6 +119,14 @@ resource "aws_security_group" "james_http_sg" {
     cidr_blocks = ["0.0.0.0/0"]
     description = "port 80 for public access"
   }
+
+  ingress {
+    from_port   = 8000
+    to_port     = 8000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "port 8000 for public access"
+  }
 }
 
 resource "aws_security_group" "ec2_security_group" {

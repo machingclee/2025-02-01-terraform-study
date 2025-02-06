@@ -53,6 +53,10 @@ resource "aws_instance" "james_node" {
   }
 }
 
-# generate an rsa key by ssh-keygen -t rsa
-
-
+# attach EC2 instances (target_id's) to the target group (target_group_arn)
+resource "aws_lb_target_group_attachment" "james_tg_attach" {
+  count            = var.instance_count
+  target_group_arn = var.james_target_group_arn
+  target_id        = aws_instance.james_node[count.index].id
+  // port = 8000 target port of the EC2, this will override the port in target group on a per instance basis
+}
